@@ -50,10 +50,10 @@ class MyRNN(chainer.Chain):
         return accum_loss
 
 # Initialize model    
-
+print (len(vocab))
 demb = 100
 model = MyRNN(len(vocab), demb)
-cuda.get_device(0).use()       ## added 
+cuda.get_device(1).use()       ## added 
 model.to_gpu()                 ## added 
 optimizer = optimizers.Adam()
 optimizer.setup(model)
@@ -72,7 +72,7 @@ for epoch in range(5):
             optimizer.update()
             s = []                
         if (pos % 100 == 0):
-            print pos, "/", len(train_data)," finished"
+            print (pos, "/", len(train_data)," finished")
     outfile = "myrnn-" + str(epoch) + ".model"
     serializers.save_npz(outfile, model)
 
